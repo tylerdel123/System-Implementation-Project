@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Admin Pannel</title>
+        <link rel="icon" type="image/x-icon" href="/images/logo.png">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/stylesheets/Admin_Page.Css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+    </head>
+    <body>
+        <div class="Top">
+        <h2 class="topText">Admin Panel</h2>
+        </div>
+
+        <div class="Bottom">
+            <div class="left">
+                <div class="logo"><img src="/images/logo.png" id="logo" alt="System Logo" style="height: 150px;"></div>
+                <div class="box">
+                    <div class="boxe">Main Navigation</div>
+                    <a href="/DashboardData"><div class="boxes"><i class="fas fa-home"></i>Dashboard</div></a>
+                    <div class="boxes"><i class="fas fa-book"></i>Manage Courses</div> 
+                    <a href="/Admin_Page_AddCourse"><div class="boxes"><i class="fas fa-edit"></i>Add Course</div></a>
+                    <a href="/ClassData"><div class="boxes" id ="active"><i class="fas fa-book"></i>Classes</div></a>
+                    <a href="/StudentData"><div class="boxes" id ="manageS"><i class="fas fa-address-book"></i>Manage Students</div></a>
+                    <a href="/Admin_Page_AddStudent"><div class="boxes"><i class="fas fa-edit"></i>Add Student</div></a>
+                    <a href="/TeacherData"><div class="boxes"><i class="fas fa-address-book"></i>Manage Teachers</div></a>
+                    <a href="/Admin_Page_AddTeacher"><div class="boxes"><i class="fas fa-edit"></i>Add Teacher</div></a>
+                    <div class="boxes"><i class="fas fa-calendar-alt"></i>Student Attendance</div>
+                    <a href="/ProfileData"><div class="boxes"><i class="fas fa-portrait"></i>My Profile</div></a>
+                    <a href="/LoginData/logout"><div class="boxes"><i class="fas fa-power-off"></i>Logout</div></a>
+                  </div>
+            </div>
+            <div class="right">
+                <div class="dashboard">
+                <!--Manage Students page-->
+                <div class="dashboardBanner" id="dashboardBanner">
+                    <H2>Classes</H2>
+                </div>
+                <div class="dashboardContent" id="dashboardContent">
+                    <%= title %>
+
+                    <% if(action == 'edit') { %>
+                    <br>
+            <div class="card">
+                <br>
+                <div class="card-body">
+                    <form method="POST" action="/classData/edit/<%= classData.CourseID %>">
+                        <div class="row">
+                            <div class="field">
+                                <div class="input-area">
+                                    <input type="text" name="CourseNum" id="CourseNum" class="form-control" value="<%= classData.CourseNum %>" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="input-area">
+                                    <input type="text" name="CourseTitle" id="CourseTitle" class="form-control" value="<%= classData.CourseTitle %>" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" name="submit_button" class="btn btn-primary" value="Edit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <% } else if(action === 'add') { %>
+                <br>
+                
+                <br>
+                    <form action="/ClassData/addClass" method="POST">
+                        <div class="field CourseCode">
+                          <div class="input-area">
+                            <input type="text" id="ClassName" name="ClassName" placeholder="Class Name">
+                          </div>
+                        </div>
+                        <select id="Semester" name="Semester">
+                            <option value="">Select Semester</option>
+                            <option value="volvo">Spring</option>
+                            <option value="saab">Summer</option>
+                            <option value="mercedes">Fall</option>
+                          </select>
+                          <br>
+                          <br>
+                          <div class="field SemesterYear">
+                            <div class="input-area">
+                              <input type="number" id="SemesterYear" name="SemesterYear" placeholder="Semester Year">
+                            </div>
+                          </div>
+                          <select id="Teacher" name="Teacher">
+                            <option value="">Select Instructor</option>
+                            <% for(var count = 0; count < classData.length; count++) { %>
+                                <option value="<%= classData[count].TeachID %>"><%= classData[count].TeachFirstName + " " + classData[count].TeachLastName %></option>
+                            <% }%>
+                          </select>
+                          <select id="Course" name="Course">
+                            <option value="">Select Course</option>
+                            <% for(var count = 0; count < classData.length; count++) { %>
+                                <option value="<%= classData[count].CourseID %>"><%= classData[count].CourseTitle + " " + classData[count].CourseNum %></option>
+                            <% }%>
+                          </select>
+                          
+                        <input type="submit" value="Submit">
+                      </form>
+
+
+            <% } else { %>
+              <% if(message.length > 0) { %>
+                <div class="alert alert-success">
+                    <p><%= message %></p>
+                </div>
+                <% } %> 
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <a href="/ClassData/add" class="AddClassBTN">Add Class</a>
+                        
+                        
+                        <div class="col"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Class Name</th>
+                                <th>Semester</th>
+                                <th>Year</th>
+                                <th>Taught By</th>
+                                <th>Course Name</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%
+                            if(classData.length > 0)
+                            {
+                                classData.forEach(function(data){
+                            %>
+                            <tr class ="active-row">
+                                <td><%= data.Class_Name %></td>
+                                <td><%= data.Semester %></td>
+                                <td><%= data.Semester_Year %></td>
+                                <td><%= data.TeachFirstName %> <%= data.TeachLastName %></td>
+                                <td><%= data.CourseTitle %></td>
+                                <td>
+                                    <a href="/ClassData/edit/<%= data.Class_ID %>" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="/ClassData/delete/<%= data.Class_ID %>" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                            <%
+                                });
+                            }
+                            else
+                            {
+                            %>
+                            <tr>
+                                <td colspan="5">No Data Found</td>
+                            </tr>
+                            <t/body>
+                            <%
+                            }
+                            %>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <% } %>
+                </div>
+
+                
+            </div>
+            </div>
+        </div>
+        
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    </body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Teacher Pannel</title>
+        <link rel="icon" type="image/x-icon" href="/images/logo.png">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/stylesheets/Admin_Page.Css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+    </head>
+    <body>
+        <div class="Top">
+        <h2 class="topText">Teacher Panel</h2>
+        </div>
+
+        <div class="Bottom">
+            <div class="left">
+                <div class="logo"><img src="/images/logo.png" id="logo" alt="System Logo" style="height: 150px;"></div>
+                <div class="box">
+                    <div class="boxe">Main Navigation</div>
+                    <a href="/TeacherDashboardData"><div class="boxes"><i class="fas fa-home"></i>Dashboard</div></a>
+                    <div class="boxes"><i class="fas fa-book"></i>Manage Classes</div> 
+                    <div class="boxes"><i class="fas fa-calendar-alt"></i>Student Attendance</div>
+                    <a href="/ProfileData"><div class="boxes"><i class="fas fa-portrait"></i>My Profile</div></a>
+                    <a href="/TeacherLogin/logoutTeacher"><div class="boxes"><i class="fas fa-power-off"></i>Logout</div></a>
+                  </div>
+            </div>
+            <div class="right">
+                <div class="dashboard">
+                <!--Manage Students page-->
+                <div class="dashboardBanner" id="dashboardBanner">
+                    <H2>Classes</H2>
+                </div>
+                <div class="dashboardContent" id="dashboardContent">
+                    <%= title %>
+
+                    <% if(action == 'Student_roster') { %>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    
+                                    
+                                    
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="styled-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
+                                            
+                                            
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <%
+                                        if(StudentData.length > 0)
+                                        {
+                                            StudentData.forEach(function(data){
+                                        %>
+                                        <tr class ="active-row">
+                                            <td><%= data.StuLastName %></td>
+                                            <td><%= data.StuFirstName %></td>
+                                            
+                                            
+                                        </tr>
+                                        <%
+                                            });
+                                        }
+                                        else
+                                        {
+                                        %>
+                                        <tr>
+                                            <td colspan="5">No Data Found</td>
+                                        </tr>
+                                        <t/body>
+                                        <%
+                                        }
+                                        %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+            <% } else if(action === 'Student_Grades') { %>
+                <% if(message.length > 0) { %>
+                            <div class="alert alert-success">
+                                <p><%= message %></p>
+                            </div>
+                            <% } %> 
+                <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    
+                                    
+                                    
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="table-responsive">
+                                    <table class="styled-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
+                                            <th>Grade Percent</th>
+                                            <th>Letter Grade</th>
+                                            <th>Actions</th>
+                                            
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <%
+                                        if(StudentGradeData.length > 0)
+                                        {
+                                            StudentGradeData.forEach(function(data){
+                                        %>
+                                        <tr class ="active-row">
+                                            <td><%= data.StuLastName %></td>
+                                            <td><%= data.StuFirstName %></td>
+                                            <td><%= data.Grade %>%</td>
+                                            <% if(data.Grade <= 100 && data.Grade >= 90) { %>
+                                            <td>A</td>
+                                            <% } else if(data.Grade <= 90 && data.Grade >= 80) { %>
+                                            <td>B</td>
+                                            <% } else if(data.Grade <= 80 && data.Grade >= 70) { %>
+                                            <td>C</td>
+                                            <% } else if(data.Grade <= 70 && data.Grade >= 60) { %>
+                                            <td>D</td>
+                                            <% } else { %>
+                                            <td>F</td>
+                                            <% } %>
+                                            <td>
+                                                <a href="/TeacherGradeData/editGrade/<%= data.Class_ID %>/<%= data.StuID %>" class="btn btn-primary btn-sm">Edit Grade</a>
+                                            </td>
+
+                                        </tr>
+                                        <%
+                                            });
+                                        }
+                                        else
+                                        {
+                                        %>
+                                        <tr>
+                                            <td colspan="5">No Data Found</td>
+                                        </tr>
+                                        <t/body>
+                                        <%
+                                        }
+                                        %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% } else if(action === 'Edit_Student_Grades') { %>
+                            <div class="card-body">
+                    <form method="POST" action="/TeacherGradeData/editGrade/<%= StudentGradeData.Class_ID %>/<%= StudentGradeData.StuID %>/end">
+                        
+                        <div class="row">
+                            <div class="field">
+                                <div class="input-area">
+                                    
+                                    <input type="Number" name="Grade" id="Grade" class="form-control" value="<%= StudentGradeData.Grade %>" />
+                                </div>
+                            </div>
+                            
+                        <div class="mb-3">
+                            <input type="submit" name="submit_button" class="btn btn-primary" value="Edit" />
+                        </div>
+                    </form>
+                    
+                </div>
+                </div>
+
+            <% } else { %>
+              
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        
+                        
+                        
+                        <div class="col"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Class Name</th>
+                                <th>Course Number</th>
+                                <th>Semester</th>
+                                <th>Year</th>
+                                <th>Actions</th>
+                                
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%
+                            if(GradeData.length > 0)
+                            {
+                                GradeData.forEach(function(data){
+                            %>
+                            <tr class ="active-row">
+                                <td><%= data.Class_Name %></td>
+                                <td><%= data.CourseNum %></td>
+                                <td><%= data.Semester %></td>
+                                <td><%= data.Semester_Year %></td>
+                                <td>
+                                    <a href="/TeacherGradeData/view/<%= data.Class_ID %>" class="btn btn-primary btn-sm">Student Roster</a>
+                                    <a href="/TeacherGradeData/grades/<%= data.Class_ID %>" class="btn btn-primary btn-sm">Student Grades</a>
+                                    </td>
+                                
+                            </tr>
+                            <%
+                                });
+                            }
+                            else
+                            {
+                            %>
+                            <tr>
+                                <td colspan="5">No Data Found</td>
+                            </tr>
+                            <t/body>
+                            <%
+                            }
+                            %>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <% } %>
+                </div>
+
+                
+            </div>
+            </div>
+        </div>
+        
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    </body>
+</html>

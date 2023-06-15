@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Student/Faculty Sign In Page</title>
+        <link rel="icon" type="image/x-icon" href="/images/logo.png">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/stylesheets/login_Page.Css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    </head>
+    <body>
+        
+        <div class="wrapper">
+            <img src="/images/logo2.png" alt="System Logo" style="height: 80px;">
+            <header>Student Login</header>
+            
+            <% if(message.length > 0) { %>
+                <div class="alert alert-failed">
+                    <p><%= message %></p>
+                </div>
+                <% } %>
+                <% if(message2.length > 0) { %>
+                  <div class="Alerts alert-success">
+                      <p><%= message2 %></p>
+                  </div>
+                  <% } %> 
+            <form action='/StudentLogin/login' method='POST'>
+              <div class="field username">
+                <div class="input-area">
+                  <input type="text" name="Username" id="Username" placeholder="Username">
+                  <i class="icon fa fa-user"></i>
+                  <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Username can't be blank</div>
+              </div>
+              <div class="field password">
+                <div class="input-area">
+                  <input type="password" name="Password" id="Password"placeholder="Password">
+                  <i class="icon fas fa-lock"></i>
+                  <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Password can't be blank</div>
+              </div>
+              <div class="pass-txt"><a href="#">Forgot password?</a></div>
+              <input type="submit" value="Login">
+            </form>
+            <div class="sign-txt">Not a Student? <a href="#">Admin Login</a></div>
+          </div>
+          <script src="/loginScript/Login_Page_Script.js">
+        </script>
+        <div class="backgroundSvg">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#5372F0" fill-opacity="1" d="M0,32L60,80C120,128,240,224,360,261.3C480,299,600,277,720,234.7C840,192,960,128,1080,96C1200,64,1320,64,1380,64L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+        </div>
+        </body>
+        </html>

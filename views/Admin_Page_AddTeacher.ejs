@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Admin Pannel</title>
+        <link rel="icon" type="image/x-icon" href="/images/logo.png">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="stylesheets/Admin_Page.Css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+    </head>
+    <body>
+        <div class="Top">
+        <h2 class="topText">Admin Panel</h2>
+        </div>
+
+        <div class="Bottom">
+            <div class="left">
+                <div class="logo"><img src="images/logo.png" id="logo" alt="System Logo" style="height: 150px;"></div>
+                <div class="box">
+                    <div class="boxe">Main Navigation</div>
+                    <a href="/DashboardData"><div class="boxes" id ="dash"><i class="fas fa-home"></i>Dashboard</div></a>
+                    <a href="/CourseData"><div class="boxes"><i class="fas fa-book"></i>Manage Courses</div></a>
+                    <a href="/Admin_Page_AddCourse"><div class="boxes"><i class="fas fa-edit"></i>Add Course</div></a>
+                    <a href="/ClassData"><div class="boxes"><i class="fas fa-book"></i>Classes</div></a>
+                    <a href="/StudentData"><div class="boxes" id ="manageS"><i class="fas fa-address-book"></i>Manage Students</div></a>
+                    <a href="/Admin_Page_AddStudent"><div class="boxes"><i class="fas fa-edit"></i>Add Student</div></a>
+                    <a href="/TeacherData"><div class="boxes"><i class="fas fa-address-book"></i>Manage Teachers</div></a>
+                    <div class="boxes" id ="active"><i class="fas fa-edit"></i>Add Teacher</div>
+                    <div class="boxes"><i class="fas fa-calendar-alt"></i>Student Attendance</div>
+                    <a href="/ProfileData"><div class="boxes"><i class="fas fa-portrait"></i>My Profile</div></a>
+                    <a href="/LoginData/logout"><div class="boxes"><i class="fas fa-power-off"></i>Logout</div></a>
+                  </div>
+            </div>
+            <div class="right">
+                <div class="dashboard">
+                    <!--Dashboard Page-->
+                <div class="dashboardBanner" id="dashboardBanner">
+                    <H2>Add Teacher</H2>
+                </div>
+                <div class="dashboardContent" id="dashboardContent">
+                <p>Add Teacher Form</p>
+                <br>
+                    <form action="/newTeacher" method="POST">
+                        <div class="field firstName">
+                          <div class="input-area">
+                            <input type="text" id="fName" name="fName" placeholder="First Name">
+                            <i class="error error-icon fas fa-exclamation-circle"></i>
+                          </div>
+                          <div class="error error-txt">First name can't be blank</div>
+                        </div>
+                        <div class="field lastNmae">
+                          <div class="input-area">
+                            <input type="text" id="lName" name="lName" placeholder="Last Name">
+                            <i class="error error-icon fas fa-exclamation-circle"></i>
+                          </div>
+                          <div class="error error-txt">Last name can't be blank</div>
+                        </div>
+                        <div class="field dateOfBirth">
+                            <div class="input-area">
+                              <input type="text" id="DoB" name="DoB" placeholder="Date of Birth">
+                              <i class="error error-icon fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="error error-txt">Date of birth can't be blank</div>
+                          </div>
+                          <div class="field address">
+                            <div class="input-area">
+                              <input type="text" id="address" name="address" placeholder="Address">
+                              <i class="error error-icon fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="error error-txt">Address can't be blank</div>
+                          </div>
+                          <div class="field emercencyContact#">
+                            <div class="input-area">
+                              <input type="text" id="eNum" name="eNum" placeholder="Emergency Phone Number">
+                              <i class="error error-icon fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="error error-txt">Emergency phone number can't be blank</div>
+                          </div>
+                          <div class="field gender">
+                            <div class="input-area">
+                              <input type="text" id="gender" name="gender" placeholder="Gender">
+                              <i class="error error-icon fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="error error-txt">Gender can't be blank</div>
+                          </div>
+                        <input type="submit" value="Submit">
+                      </form>
+                    
+            
+                </div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <script src="Admin_Page.js"></script>
+    </body>
+</html>
